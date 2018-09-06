@@ -116,7 +116,7 @@ class Loader
      * - resolving nested variables.
      *
      * @param string $name
-     * @param string $value
+     * @param any $value
      *
      * @return array
      */
@@ -125,6 +125,13 @@ class Loader
         list($name, $value) = $this->processFilters($name, $value);
 
         $value = $this->resolveNestedVariables($value);
+        
+        if (ctype_digit($value))
+            $value = (int)$value;
+        else if (strtolower($value) === 'true')
+            $value = true;
+        else if (strtolower($value) === 'false')
+            $value = false;
 
         return array($name, $value);
     }
