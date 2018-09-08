@@ -256,6 +256,7 @@ class Loader
             $value = preg_replace($regexPattern, '$1', $value);
             $value = str_replace("\\$quote", $quote, $value);
             $value = str_replace('\\\\', '\\', $value);
+            $value = trim($value, $quote);
         } else {
             $parts = explode(' #', $value, 2);
             $value = trim($parts[0]);
